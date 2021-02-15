@@ -78,7 +78,7 @@ class KNN(BinaryClassifier):
             X = np.asarray(X)
             instances = np.asarray(self.trX)
             dis_list = np.asarray([np.linalg.norm(point-X) for point in self.trX]) # the list where we store the distance between new instance and the each of old instance.
-            inner_points = np.where(dis_list < eps)
+            inner_points = np.where(dis_list <= eps)
             val = sum(self.trY[inner_points])
 
             return val
