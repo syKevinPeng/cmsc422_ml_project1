@@ -8,6 +8,7 @@ In dumbClassifiers.py, we implement the world's simplest classifiers:
 from binary import *
 from numpy  import *
 from collections import Counter
+import numpy as np
 
 import util
 
@@ -59,16 +60,14 @@ class AlwaysPredictMostFrequent(BinaryClassifier):
         X is an vector and we want to make a single prediction: Just
         return the most frequent class!
         """
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+        return 1 if sum(X) > 0 else 0
 
     def train(self, X, Y):
         '''
         just figure out what the most frequent class is and store it in self.mostFrequentClass
         '''
 
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+        self.mostFrequentClass = self.predict(X)
 
 class FirstFeatureClassifier(BinaryClassifier):
     """
@@ -95,14 +94,24 @@ class FirstFeatureClassifier(BinaryClassifier):
         """
         check the first feature and make a classification decision based on it
         """
-
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+        return self.classForPos if X[0] > 0 else self.classForNeg
 
     def train(self, X, Y):
         '''
         just figure out what the most frequent class is for each value of X[:,0] and store it
         '''
+        X = np.asarray(X[:,0])
+        Y = np.asarray(Y)
+        x_pos = np.argwhere(X > 0)
+        x_neg = np.argwhere(X <=0)
+        self.classForPos = 1 if sum(Y[x_pos]) > 0 else -1
+        self.classForNeg = 1 if sum(Y[x_neg]) > 0 else -1
+        print(sum(Y[x_pos]))
+        print(sum(Y[x_neg]))
+        # Y[x_pos]
 
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+
+        # print(np.asarray(X))
+        # print(np.asarray(Y))
+        # if (X[0] > 0):
+
