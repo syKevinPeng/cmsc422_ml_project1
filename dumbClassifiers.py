@@ -106,12 +106,6 @@ class FirstFeatureClassifier(BinaryClassifier):
         x_neg = np.argwhere(X <=0)
         self.classForPos = 1 if sum(Y[x_pos]) > 0 else -1
         self.classForNeg = 1 if sum(Y[x_neg]) > 0 else -1
-        print(sum(Y[x_pos]))
-        print(sum(Y[x_neg]))
-        # Y[x_pos]
 
 
-        # print(np.asarray(X))
-        # print(np.asarray(Y))
-        # if (X[0] > 0):
 
