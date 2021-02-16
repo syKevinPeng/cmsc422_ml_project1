@@ -1,6 +1,10 @@
 #CMSC422 Project1 WriteUp
 ### Siyuan Peng, Shi Jiunn Teo
 #### WU1: why is this computation equivalent to computing classification accuracy?
+Since ```datasets.TennisData.Y``` and ```h.predictAll(datasets.TennisData.X)``` return a numpy array. The result of comparing them with 0 returns
+a binary array (true-false array) indicating which number is larger than 0. Then comparing the two binary array will produce another binary array, in which
+True means the prediction is correct and False means the prediction is wrong. Also, when taking the mean of a binary numpy array, True is considered as 1 and
+false is considered as 0. Therefore, ```np.mean(prediction == ground_truth)``` equals to (number of correct prediction)/(total number of prediction). Another 
 #### WU2: We should see training accuracy (roughly) going down and test accuracy (roughly) going up. Why does training accuracy tend to go down? Why is test accuracy not monotonically increasing? You should also see jaggedness in the test curve toward the left. Why?
 #### WU3: You should see training accuracy monotonically increasing and test accuracy making something like a hill. Which of these is guaranteed to happen and which is just something we might expect to happen? Why?
 #### WU4: For the digits data, generate train/test curves for varying values of K and epsilon (you figure out what are good ranges, this time). Include those curves: do you see evidence of overfitting and underfitting? Next, using K=5, generate learning curves for this data.

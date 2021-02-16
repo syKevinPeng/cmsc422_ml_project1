@@ -4,8 +4,8 @@ This module is for training, testing an evaluating classifiers.
 
 from numpy import *
 from pylab import *
-
-import sys
+import matplotlib.pylab as plt
+import sys, os
 import util
 import binary
 
@@ -100,13 +100,14 @@ def hyperparamCurveSet(classifier, hpName, hpValues, dataset):
     return hyperparamCurve(classifier, hpName, hpValues, dataset.X, dataset.Y, dataset.Xte, dataset.Yte)
 
 def plotCurve(titleString, res):
-    plot(res[0], res[1], 'b-',
+    fig, ax = plt.subplots()
+    ax.plot(res[0], res[1], 'b-',
          res[0], res[2], 'r-')
-    legend( ('Train', 'Test') )
+    ax.legend( ('Train', 'Test') )
     #xlabel('# of training points')
-    ylabel('Accuracy')
-    title(titleString)
-    show()
+    ax.set_ylabel('Accuracy')
+    ax.set_title(titleString)
+    fig.savefig(os.path.join("graph_output",titleString +".png"))
 
 def shufflePoints(X, Y):
     """
