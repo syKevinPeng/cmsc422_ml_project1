@@ -64,22 +64,22 @@ class KNN(BinaryClassifier):
             # hint: look at the 'argsort' function in numpy
             K = self.opts['K']         # how many NN to use
 
+            dis_list = np.asarray([np.linalg.norm(point - X) for point in self.trX])
+            first_k_arg = np.argsort(dis_list)[:k]
             val = 0                    # this is our return value: #pos - #neg of the K nearest neighbors of X
-            ### TODO: YOUR CODE HERE
-            util.raiseNotDefined()
+
 
             return val
         else:
             # this is an epsilon ball model
             eps = self.opts['eps']     # how big is our epsilon ball
 
-            val = 0                    # this is our return value: #pos - #neg within an epsilon ball of X
             # calculate the distance between the new point and the rest of points
             X = np.asarray(X)
             instances = np.asarray(self.trX)
             dis_list = np.asarray([np.linalg.norm(point-X) for point in self.trX]) # the list where we store the distance between new instance and the each of old instance.
             inner_points = np.where(dis_list <= eps)
-            val = sum(self.trY[inner_points])
+            val = sum(self.trY[inner_points]) # this is our return value: #pos - #neg within an epsilon ball of X
 
             return val
 
