@@ -77,9 +77,9 @@ class Perceptron(BinaryClassifier):
             self.numUpd  = self.numUpd  + 1
 
             # perform an update
-            self.weights = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
-
-            self.bias    = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+            self.weights = self.weights + Y * X
+            self.predict(X)
+            self.bias    = self.bias + Y
 
 
     def nextIteration(self):
