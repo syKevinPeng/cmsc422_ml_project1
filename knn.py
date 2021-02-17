@@ -78,7 +78,6 @@ class KNN(BinaryClassifier):
             dis_list = np.asarray([np.linalg.norm(point-X) for point in self.trX]) # the list where we store the distance between new instance and the each of old instance.
             inner_points = np.where(dis_list <= eps)
             val = sum(self.trY[inner_points]) # this is our return value: #pos - #neg within an epsilon ball of X
-
             return val
 
             
