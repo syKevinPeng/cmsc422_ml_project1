@@ -65,10 +65,8 @@ class KNN(BinaryClassifier):
             K = self.opts['K']         # how many NN to use
 
             dis_list = np.asarray([np.linalg.norm(point - X) for point in self.trX])
-            first_k_arg = np.argsort(dis_list)[:k]
-            val = 0                    # this is our return value: #pos - #neg of the K nearest neighbors of X
-
-
+            first_k_arg = np.argsort(dis_list)[:K]
+            val = sum(self.trY[first_k_arg])                    # this is our return value: #pos - #neg of the K nearest neighbors of X
             return val
         else:
             # this is an epsilon ball model
