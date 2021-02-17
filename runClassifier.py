@@ -35,7 +35,8 @@ def trainTest(classifier, X, Y, Xtest, Ytest):
     return (trAcc, teAcc, Ypred)
 
 def trainTestSet(classifier, dataset):
-    trainTest(classifier, dataset.X, dataset.Y, dataset.Xte, dataset.Yte)
+    result = trainTest(classifier, dataset.X, dataset.Y, dataset.Xte, dataset.Yte)
+    return result
 
 def learningCurve(classifier, X, Y, Xtest, Ytest):
     """
