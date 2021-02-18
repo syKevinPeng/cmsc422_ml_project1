@@ -30,4 +30,9 @@ Knn exbits similiar patter as Epsilon NN: when K = 6, the model heavily overfitt
 - ##### A. First, get a histogram of the raw digits data in 784 dimensions. You'll probably want to use the computeDistances function together with the plotting in HighD. 
 - ##### B. Rewrite computeDistances so that it can subsample features down to some fixed dimensionality. For example, you might write computeDistancesSubdims(data, d), where d is the target dimensionality. In this function, you should pick d dimensions at random (I would suggest generating a permutation of the number [1..784] and then taking the first d of them), and then compute the distance but only looking at those dimensions. 
 - ##### C. Generate an equivalent plot to HighD with d in [2, 8, 32, 128, 512] but for the digits data rather than the random data. Include a copy of both plots and describe the differences.
-#### WU6: Using the tools provided, generate (a) a learning curve (x-axis=number of training examples) for the perceptron (5 epochs) on the sentiment data and (b) a plot of number of epochs versus train/test accuracy on the entire dataset.
+#### WU6: 
+- ##### Using the tools provided, generate (a) a learning curve (x-axis=number of training examples) for the perceptron (5 epochs) on the sentiment data and 
+
+![perceptron curve for 5 epochs](graph_output/Perceptron%20Learning%20Curve%20for%205%20epochs.png)
+- ##### (b) a plot of number of epochs versus train/test accuracy on the entire dataset.
+TODO!
