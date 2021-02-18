@@ -64,8 +64,13 @@ class DT(BinaryClassifier):
         branch.
         """
 
-        ### TODO: YOUR CODE HERE
-        util.raiseNotDefined()
+        if self.isLeaf:
+            return repr(self.label)
+        else:
+            if X[self.feature] < 0.5:
+                return self.left.predict(X)
+            else:
+                return self.right.predict(X)
 
     def trainDT(self, X, Y, maxDepth, used):
         """
@@ -80,9 +85,9 @@ class DT(BinaryClassifier):
         if maxDepth <= 0 or len(util.uniq(Y)) <= 1:
             # we'd better end at this point.  need to figure
             # out the label to return
-            self.isLeaf = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+            self.isLeaf = True
 
-            self.label  = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+            self.label  = util.mode(Y)
 
 
         else:
@@ -96,9 +101,9 @@ class DT(BinaryClassifier):
 
                 # suppose we split on this feature; what labels
                 # would go left and right?
-                leftY  = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                leftY  = Y[X[:, d] < 0.5]
 
-                rightY = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                rightY = Y[X[:, d] >= 0.5]
 
 
                 # we'll classify the left points as their most
@@ -118,9 +123,9 @@ class DT(BinaryClassifier):
                 self.label  = util.mode(Y)
 
             else:
-                self.isLeaf  = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                self.isLeaf  = False
 
-                self.feature = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                self.feature = bestFeature
 
 
                 self.left  = DT({'maxDepth': maxDepth-1})
@@ -130,8 +135,17 @@ class DT(BinaryClassifier):
                 # and
                 #   self.right.trainDT(...) 
                 # with appropriate arguments
-                ### TODO: YOUR CODE HERE
-                util.raiseNotDefined()
+                leftX = X[X[:, self.feature] < 0.5]
+                rightX = X[X[:, self.feature] >= 0.5]
+                leftY = Y[X[:, self.feature] < 0.5]
+                rightY = Y[X[:, self.feature] >= 0.5]
+                used = used + [self.feature]
+                
+                # recurse left child
+                self.left.trainDT(leftX, leftY, self.left.opts['maxDepth'], used)
+                
+                # recurse right child
+                self.right.trainDT(rightX, rightY, self.right.opts['maxDepth'], used)
 
     def train(self, X, Y):
         """
