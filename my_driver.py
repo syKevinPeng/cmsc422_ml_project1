@@ -1,6 +1,7 @@
 import numpy as np
-import util, datasets, binary, dumbClassifiers
+import util, datasets, binary, dumbClassifiers, os
 import runClassifier, knn, perceptron
+import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
     # eps_curve_6 = runClassifier.trainTestSet(knn.KNN({'isKNN': False, 'eps': 6}), datasets.DigitData)
@@ -19,9 +20,21 @@ if __name__ == "__main__":
     # runClassifier.plotClassifier(np.array([7.3, 18.9]), 0.0)
     # runClassifier.trainTestSet(perceptron.Perceptron({'numEpoch': 2}), datasets.SentimentData)
 
-    # Train test curve for perceptron
-    percetron_curve = runClassifier.learningCurveSet(perceptron.Perceptron({'numEpoch': 5}), datasets.SentimentData)
-    runClassifier.plotCurve('Perceptron Learning Curve for 5 epochs', percetron_curve)
-
-
+    # generate curve for wu6 b
+    num_epochs = 10
+    train_acc_list = []
+    test_acc_list = []
+    for i in range(num_epochs):
+        train_acc, test_acc, _= runClassifier.trainTestSet(perceptron.Perceptron({'numEpoch': i+1}), datasets.SentimentData)
+        train_acc_list.append(train_acc)
+        test_acc_list.append(test_acc)
+    X = np.arange(num_epochs) + 1
+    # runClassifier.plotCurve('Perceptron Learning Curve for 5 epochs', percetron_curve)
+    plt.plot(X,train_acc_list, label="Training Accuracy")
+    plt.plot(X,test_acc_list, label="Testing Accuracy")
+    plt.title("Train/Test Accuracy VS Number of Epochs")
+    plt.xlabel("Number of Epochs")
+    plt.ylabel("Accuracy")
+    plt.legend()
+    plt.savefig(os.path.join("graph_output","wu6_b" +".png"))
     pass

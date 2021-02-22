@@ -35,4 +35,4 @@ Knn exbits similiar patter as Epsilon NN: when K = 6, the model heavily overfitt
 
 ![perceptron curve for 5 epochs](graph_output/Perceptron%20Learning%20Curve%20for%205%20epochs.png)
 - ##### (b) a plot of number of epochs versus train/test accuracy on the entire dataset.
-TODO!
+![wu6.b curve](graph_output/wu6_b.png)
