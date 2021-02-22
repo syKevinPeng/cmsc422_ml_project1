@@ -109,7 +109,7 @@ class DT(BinaryClassifier):
                 # we'll classify the left points as their most
                 # common class and ditto right points.  our error
                 # is how many points are mislabeled (not the mode of their partition).
-                error = util.raiseNotDefined()    ### TODO: YOUR CODE HERE
+                error = size((leftY != util.mode(leftY)).nonzero()) + size((rightY != util.mode(rightY)).nonzero())
 
 
                 # check to see if this is a better error rate
