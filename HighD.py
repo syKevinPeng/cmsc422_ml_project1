@@ -1,7 +1,11 @@
 from math import *
+from imports import *
 import random
 from numpy import *
 import matplotlib.pyplot as plt
+import os
+import KNNDigits
+
 
 waitForEnter=False
 
@@ -27,7 +31,7 @@ def computeDistances(data):
     return dist
 if __name__ == "__main__":
     N    = 200                   # number of examples
-    Dims = [2, 8, 32, 128, 512]   # dimensionalities to try
+    Dims = [784] #[2, 8, 32, 128, 512]   # dimensionalities to try
     Cols = ['#FF0000', '#880000', '#000000', '#000088', '#0000FF']
     Bins = arange(0, 1, 0.02)
 
@@ -36,7 +40,7 @@ if __name__ == "__main__":
     plt.title('dimensionality versus uniform point distances')
 
     for i,d in enumerate(Dims):
-        distances = computeDistances(generateUniformDataset(d, N))
+        distances = computeDistances(datasets.DigitData)
         print ("D=%d, average distance=%g" % (d, mean(distances) * sqrt(d)))
         plt.hist(distances,
                  Bins,
@@ -47,8 +51,7 @@ if __name__ == "__main__":
             plt.show(False)
             x = raw_input('Press enter to continue...')
 
-
     plt.legend(['%d dims' % d for d in Dims])
-    plt.savefig('fig.pdf')
+    plt.savefig(os.path.join("graph_output", "histogramA" + ".png"))
     plt.show()
 

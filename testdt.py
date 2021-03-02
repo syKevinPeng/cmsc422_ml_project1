@@ -39,3 +39,11 @@ print("train/test accuracy:")
 runClassifier.trainTestSet(dt.DT({'maxDepth': 1}), datasets.SentimentData)
 runClassifier.trainTestSet(dt.DT({'maxDepth': 3}), datasets.SentimentData)
 runClassifier.trainTestSet(dt.DT({'maxDepth': 5}), datasets.SentimentData)
+
+#generate learning curves and hyperparmeter curves
+curve = runClassifier.learningCurveSet(dt.DT({'maxDepth': 9}), datasets.SentimentData)
+runClassifier.plotCurve('DT on Sentiment Data', curve)
+
+#generate learning curves with changing max depth hyperparameter
+curve = runClassifier.hyperparamCurveSet(dt.DT({}), 'maxDepth', [1,2,4,6,8,12,16], datasets.SentimentData)
+runClassifier.plotCurve('DT on Sentiment Data (hyperparameter)', curve)
