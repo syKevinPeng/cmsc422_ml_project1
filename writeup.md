@@ -39,6 +39,7 @@ Knn exbits similiar patter as Epsilon NN: when K = 6, the model heavily overfitt
 ![K=10](graph_output/knn_5.png)
 #### WU5: 
 - ##### A. First, get a histogram of the raw digits data in 784 dimensions. You'll probably want to use the computeDistances function together with the plotting in HighD. 
+  ![D=784](graph_output/histogramA.png)
 - ##### B. Rewrite computeDistances so that it can subsample features down to some fixed dimensionality. For example, you might write computeDistancesSubdims(data, d), where d is the target dimensionality. In this function, you should pick d dimensions at random (I would suggest generating a permutation of the number [1..784] and then taking the first d of them), and then compute the distance but only looking at those dimensions. 
 - ##### C. Generate an equivalent plot to HighD with d in [2, 8, 32, 128, 512] but for the digits data rather than the random data. Include a copy of both plots and describe the differences.
 #### WU6: 

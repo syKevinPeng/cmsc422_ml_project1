@@ -31,7 +31,7 @@ def computeDistances(data):
     return dist
 if __name__ == "__main__":
     N    = 200                   # number of examples
-    Dims = [784] #[2, 8, 32, 128, 512]   # dimensionalities to try
+    Dims = [784] #[2, 8, 32, 128, 512]   # dimensionalities to try 784
     Cols = ['#FF0000', '#880000', '#000000', '#000088', '#0000FF']
     Bins = arange(0, 1, 0.02)
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     plt.title('dimensionality versus uniform point distances')
 
     for i,d in enumerate(Dims):
-        distances = computeDistances(datasets.DigitData)
+        distances = computeDistances(datasets.loadDigitData('data/1vs2.all'))
         print ("D=%d, average distance=%g" % (d, mean(distances) * sqrt(d)))
         plt.hist(distances,
                  Bins,
