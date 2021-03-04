@@ -4,8 +4,6 @@ import random
 from numpy import *
 import matplotlib.pyplot as plt
 import os
-import KNNDigits
-
 
 waitForEnter=False
 
@@ -15,23 +13,32 @@ def generateUniformExample(numDim):
 def generateUniformDataset(numDim, numEx):
     return [generateUniformExample(numDim) for n in range(numEx)]
 
-def computeExampleDistance(x1, x2):
+def computeExampleDistance(x1, x2, dims):
     dist = 0.0
-    for d in range(len(x1)):
-        dist += (x1[d] - x2[d]) * (x1[d] - x2[d])
+    for d in dims:
+        dist += (x1[d-1] - x2[d-1]) * (x1[d-1] - x2[d-1])
     return sqrt(dist)
 
-def computeDistances(data):
-    N = len(data)
-    D = len(data[0])
+def computeDistancesSubdims(data, d):
+    N = len(data[0])
+    print(N)
+    D = len(data[0][0])
+    print(D)
+    # select d from 784 diminsion
+    print(d)
+    dRange = range(1, 784)
+    dims = np.random.choice(dRange, d)
+    print(dims)
+
+    #calculate distance according to dims selected
     dist = []
     for n in range(N):
         for m in range(n):
-            dist.append( computeExampleDistance(data[n],data[m])  / sqrt(D))
+            dist.append( computeExampleDistance(data[0][n], data[0][m], dims)  / sqrt(d))
     return dist
 if __name__ == "__main__":
     N    = 200                   # number of examples
-    Dims = [784] #[2, 8, 32, 128, 512]   # dimensionalities to try 784
+    Dims = [2, 8, 32, 128, 512]   # dimensionalities to try 784
     Cols = ['#FF0000', '#880000', '#000000', '#000088', '#0000FF']
     Bins = arange(0, 1, 0.02)
 
@@ -40,7 +47,7 @@ if __name__ == "__main__":
     plt.title('dimensionality versus uniform point distances')
 
     for i,d in enumerate(Dims):
-        distances = computeDistances(datasets.loadDigitData('data/1vs2.all'))
+        distances = computeDistancesSubdims(datasets.loadDigitData('data/1vs2.all'), d)
         print ("D=%d, average distance=%g" % (d, mean(distances) * sqrt(d)))
         plt.hist(distances,
                  Bins,
@@ -52,6 +59,6 @@ if __name__ == "__main__":
             x = raw_input('Press enter to continue...')
 
     plt.legend(['%d dims' % d for d in Dims])
-    plt.savefig(os.path.join("graph_output", "histogramA" + ".png"))
+    plt.savefig(os.path.join("graph_output", "histogramC" + ".png"))
     plt.show()
 
